@@ -2,7 +2,11 @@
     "name": "orfyassignment-root",
     "private": true,
     "scripts": {
+        "dev": "concurrently \"cd Frontend && npm run dev\" \"cd Backend && npm start\"",
         "build": "cd Frontend && npm install && npm run build",
         "install": "cd Frontend && npm install && cd ../Backend && npm install"
+    },
+    "dependencies": {
+        "concurrently": "^9.1.0"
     }
 }
