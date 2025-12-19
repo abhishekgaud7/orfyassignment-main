@@ -55,10 +55,15 @@ const ProductsPage = () => {
       if (editingProduct) {
         await updateProduct(editingProduct._id, productData);
       } else {
-        await createProduct({
-          ...productData,
-          isPublished: activeTab === 'Published'
-        });
+        if (productData instanceof FormData) {
+          productData.append('isPublished', activeTab === 'Published');
+          await createProduct(productData);
+        } else {
+          await createProduct({
+            ...productData,
+            isPublished: activeTab === 'Published'
+          });
+        }
       }
       fetchProducts();
     } catch (error) {
@@ -84,9 +89,9 @@ const ProductsPage = () => {
 
   const handleTogglePublish = async (product) => {
     try {
-      await updateProduct(product._id, {
-        isPublished: !product.isPublished
-      });
+      const data = new FormData();
+      data.append('isPublished', !product.isPublished);
+      await updateProduct(product._id, data);
       fetchProducts();
     } catch (error) {
       console.error('Publish toggle failed', error);

@@ -2,7 +2,13 @@ const Product = require("../models/Product");
 
 exports.createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const productData = { ...req.body };
+
+    if (req.files) {
+      productData.images = req.files.map(file => file.filename);
+    }
+
+    const product = await Product.create(productData);
     res.status(201).json(product);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -20,9 +26,15 @@ exports.getProducts = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   try {
+    const productData = { ...req.body };
+
+    if (req.files && req.files.length > 0) {
+      productData.images = req.files.map(file => file.filename);
+    }
+
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      productData,
       { new: true }
     );
 

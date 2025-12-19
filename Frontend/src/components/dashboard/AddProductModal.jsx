@@ -14,13 +14,17 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
         returnEligible: 'Yes'
     });
 
+    const [selectedImages, setSelectedImages] = useState([]);
+    const [imagePreviews, setImagePreviews] = useState([]);
     const [errors, setErrors] = useState({});
 
-    
     useEffect(() => {
         if (isOpen) {
             if (initialData) {
                 setFormData(initialData);
+                if (initialData.images) {
+                    setImagePreviews(initialData.images.map(img => `http://localhost:5000/uploads/${img}`));
+                }
             } else {
                 setFormData({
                     name: '',
@@ -31,6 +35,8 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
                     brand: '',
                     returnEligible: 'Yes'
                 });
+                setSelectedImages([]);
+                setImagePreviews([]);
             }
             setErrors({});
         }
@@ -44,17 +50,35 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
         }
     };
 
+    const handleImageChange = (e) => {
+        const files = Array.from(e.target.files);
+        setSelectedImages(files);
+
+        const previews = files.map(file => URL.createObjectURL(file));
+        setImagePreviews(previews);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const newErrors = {};
         if (!formData.name.trim()) newErrors.name = 'Please enter product name';
+        if (!formData.type) newErrors.type = 'Please select product type';
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
 
-        onSave(formData);
+        const data = new FormData();
+        Object.keys(formData).forEach(key => {
+            data.append(key, formData[key]);
+        });
+
+        selectedImages.forEach(image => {
+            data.append('images', image);
+        });
+
+        onSave(data);
         onClose();
     };
 
@@ -91,7 +115,22 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
         textAlign: 'center',
         cursor: 'pointer',
         backgroundColor: '#f9f9f9',
+        marginBottom: '10px'
+    };
+
+    const previewContainerStyle = {
+        display: 'flex',
+        gap: '8px',
+        flexWrap: 'wrap',
         marginBottom: '20px'
+    };
+
+    const previewImgStyle = {
+        width: '60px',
+        height: '60px',
+        objectFit: 'cover',
+        borderRadius: '4px',
+        border: '1px solid #eee'
     };
 
     const isEditMode = !!initialData;
@@ -100,7 +139,6 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
         <Modal isOpen={isOpen} onClose={onClose} title={isEditMode ? "Edit Product" : "Add Product"}>
             <form onSubmit={handleSubmit}>
                 <div style={formSectionStyle}>
-
                     <Input
                         label="Product Name"
                         name="name"
@@ -131,7 +169,7 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
                         type="number"
                         value={formData.stock}
                         onChange={handleChange}
-                        placeholder="Total numbers of Stock available"
+                        placeholder="Enter stock quantity"
                     />
 
                     <Input
@@ -140,7 +178,7 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
                         type="number"
                         value={formData.mrp}
                         onChange={handleChange}
-                        placeholder="Total numbers of Stock available"
+                        placeholder="Enter MRP"
                     />
 
                     <Input
@@ -149,7 +187,7 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
                         type="number"
                         value={formData.sellingPrice}
                         onChange={handleChange}
-                        placeholder="Total numbers of Stock available"
+                        placeholder="Enter Selling Price"
                     />
 
                     <Input
@@ -157,15 +195,29 @@ const AddProductModal = ({ isOpen, onClose, onSave, initialData }) => {
                         name="brand"
                         value={formData.brand}
                         onChange={handleChange}
-                        placeholder="Total numbers of Stock available"
+                        placeholder="Enter Brand Name"
                     />
 
                     <div>
                         <label style={labelStyle}>Upload Product Images</label>
-                        <div style={uploadBoxStyle}>
-                            {isEditMode ? 'Add More Photos' : 'Enter Description'} <br />
-                            <strong>Browse</strong>
-                        </div>
+                        <label style={uploadBoxStyle} htmlFor="image-upload">
+                            {imagePreviews.length > 0 ? 'Select More Photos' : 'Click to Browse Images'}
+                        </label>
+                        <input
+                            id="image-upload"
+                            type="file"
+                            multiple
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={handleImageChange}
+                        />
+                        {imagePreviews.length > 0 && (
+                            <div style={previewContainerStyle}>
+                                {imagePreviews.map((src, idx) => (
+                                    <img key={idx} src={src} alt="preview" style={previewImgStyle} />
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     <div>
