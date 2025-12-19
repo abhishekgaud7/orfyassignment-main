@@ -19,4 +19,8 @@ app.use("/uploads", express.static("uploads"));
 
 app.use("/api/products", productRoutes);
 
-app.listen(5000, () => console.log("Server running on 5000"));
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(5000, () => console.log("Server running on 5000"));
+}
+
+module.exports = app;
