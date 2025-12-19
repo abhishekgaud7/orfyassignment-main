@@ -2,14 +2,23 @@
     "version": 2,
     "buildCommand": "cd Frontend && npm install && npm run build",
     "outputDirectory": "Frontend/dist",
-    "rewrites": [
+    "functions": {
+        "Backend/server.js": {
+            "runtime": "vercel-node@latest"
+        }
+    },
+    "routes": [
         {
-            "source": "/api/(.*)",
-            "destination": "/Backend/server.js"
+            "src": "/api/(.*)",
+            "dest": "/Backend/server.js"
         },
         {
-            "source": "/(.*)",
-            "destination": "/index.html"
+            "src": "/assets/(.*)",
+            "dest": "/assets/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/index.html"
         }
     ]
 }
