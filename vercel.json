@@ -4,21 +4,17 @@
     "outputDirectory": "Frontend/dist",
     "functions": {
         "Backend/server.js": {
-            "runtime": "vercel-node@latest"
+            "runtime": "@vercel/node"
         }
     },
-    "routes": [
+    "rewrites": [
         {
-            "src": "/api/(.*)",
-            "dest": "/Backend/server.js"
+            "source": "/api/(.*)",
+            "destination": "/Backend/server.js"
         },
         {
-            "src": "/assets/(.*)",
-            "dest": "/assets/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ]
 }
