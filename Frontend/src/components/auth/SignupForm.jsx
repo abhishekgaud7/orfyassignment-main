@@ -16,7 +16,6 @@ const SignupForm = ({ onSignupSuccess, onNavigateToLogin }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Validation logic here
         setIsLoading(true);
         setTimeout(() => {
             setIsLoading(false);

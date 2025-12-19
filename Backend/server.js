@@ -12,11 +12,9 @@ mongoose.connect("mongodb://127.0.0.1:27017/productr")
 
 app.use(cors());
 
-// ✅ REQUIRED MIDDLEWARES
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // 🔥 THIS FIXES YOUR ISSUE
+app.use(express.urlencoded({ extended: true }));
 
-// Serve uploaded images
 app.use("/uploads", express.static("uploads"));
 
 app.use("/api/products", productRoutes);

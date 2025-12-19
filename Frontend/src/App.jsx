@@ -20,7 +20,6 @@ function App() {
   };
 
   const handleOtpVerify = (otp) => {
-    // In a real app, verify and get token
     setStep('DASHBOARD');
   };
 
@@ -28,12 +27,10 @@ function App() {
     alert('OTP Resent! (Check console)');
   };
 
-  // Render Dashboard
   if (step === 'DASHBOARD') {
     return <ProductsPage />;
   }
 
-  // Render Auth Flow
   return (
     <AuthLayout>
       {step === 'LOGIN' && (

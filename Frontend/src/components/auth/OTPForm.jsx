@@ -17,15 +17,13 @@ const OTPForm = ({ onOtpVerify, onResend }) => {
     }, []);
 
     const handleChange = (index, value) => {
-        // Only allow numbers
         if (isNaN(value)) return;
 
         const newOtp = [...otp];
-        newOtp[index] = value.substring(value.length - 1); // Only verify last char
+        newOtp[index] = value.substring(value.length - 1);
         setOtp(newOtp);
-        setError(''); 
+        setError('');
 
-        // Auto-focus next input
         if (value && index < 5) {
             inputRefs.current[index + 1].focus();
         }
@@ -47,7 +45,6 @@ const OTPForm = ({ onOtpVerify, onResend }) => {
         setIsLoading(true);
         setTimeout(() => {
             setIsLoading(false);
-            // Simple mock validation
             if (otpString === '123456') {
                 onOtpVerify(otpString);
             } else {
@@ -97,7 +94,6 @@ const OTPForm = ({ onOtpVerify, onResend }) => {
         color: 'var(--text-dark)'
     };
 
-   
     const handleFocus = (e) => {
         if (!error) e.target.style.borderColor = 'var(--primary-color)';
     };

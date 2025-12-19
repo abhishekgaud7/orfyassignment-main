@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 const Modal = ({ isOpen, onClose, title, children }) => {
     useEffect(() => {
-        // Prevent body scroll when modal is open
         if (isOpen) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -19,7 +18,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(30, 33, 42, 0.5)', // Semi-transparent dark
+        backgroundColor: 'rgba(30, 33, 42, 0.5)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -30,7 +29,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
     const modalStyle = {
         backgroundColor: '#ffffff',
         borderRadius: '12px',
-        width: '500px', // Fixed width as per screenshot design usually
+        width: '500px',
         maxWidth: '90%',
         maxHeight: '90vh',
         overflowY: 'auto',

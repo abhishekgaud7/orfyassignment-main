@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
 const DashboardLayout = ({ children, title = 'Home' }) => {
-    const [activeItem, setActiveItem] = useState('Products'); // Default to Products for this demo
+    const [activeItem, setActiveItem] = useState('Products');
 
-    // Styles
     const layoutStyle = {
         display: 'flex',
         height: '100vh',
@@ -15,7 +14,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
 
     const sidebarStyle = {
         width: '260px',
-        backgroundColor: '#1E212A', // Dark sidebar
+        backgroundColor: '#1E212A',
         color: '#ffffff',
         display: 'flex',
         flexDirection: 'column',
@@ -42,7 +41,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
     const searchInputStyle = {
         width: '100%',
         padding: '10px 12px',
-        backgroundColor: 'rgba(255,255,255,0.05)', // Translucent dark
+        backgroundColor: 'rgba(255,255,255,0.05)',
         border: '1px solid rgba(255,255,255,0.1)',
         borderRadius: '4px',
         color: '#fff',
@@ -76,7 +75,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#F8F9FE' // Light gray bg for content area
+        backgroundColor: '#F8F9FE'
     };
 
     const headerStyle = {
@@ -106,7 +105,6 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
 
     return (
         <div style={layoutStyle}>
-            {/* Sidebar */}
             <div style={sidebarStyle} className="sidebar">
                 <div style={logoStyle}>
                     Productr <span style={{ color: '#ff6b6b' }}>∞</span>
@@ -136,9 +134,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
                 </div>
             </div>
 
-            {/* Main Content */}
             <div style={mainContentStyle}>
-                {/* Header */}
                 <div style={headerStyle}>
                     <div style={breadcrumbStyle}>
                         {activeItem === 'Products' && <span style={{ color: '#888' }}>Products</span>}
@@ -148,13 +144,11 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
                     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
                         <span style={{ color: '#888', fontSize: '14px' }}>Search Services, Products</span>
                         <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#ddd' }}>
-                            {/* Avatar placeholder */}
                             <img src="https://via.placeholder.com/32" alt="Profile" style={{ borderRadius: '50%' }} />
                         </div>
                     </div>
                 </div>
 
-                {/* Dynamic Page Content */}
                 <div style={contentAreaStyle}>
                     {children}
                 </div>

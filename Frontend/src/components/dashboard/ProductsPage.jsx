@@ -23,7 +23,6 @@ const ProductsPage = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
 
-  // FETCH PRODUCTS
   const fetchProducts = async () => {
     try {
       const data = await getProducts();
@@ -37,12 +36,9 @@ const ProductsPage = () => {
     fetchProducts();
   }, []);
 
-  // FILTER (Frontend-only publish logic)
   const displayedProducts = products.filter(p =>
     activeTab === 'Published' ? p.isPublished : !p.isPublished
   );
-
-  // --- Handlers ---
 
   const handleOpenAdd = () => {
     setEditingProduct(null);
@@ -97,7 +93,6 @@ const ProductsPage = () => {
     }
   };
 
-  // --- Styles (UNCHANGED) ---
   const tabsContainerStyle = {
     display: 'flex',
     gap: '24px',

@@ -16,18 +16,17 @@ const AuthLayout = ({ children }) => {
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        backgroundColor: 'var(--bg-light)', // Fallback
-        backgroundImage: 'linear-gradient(135deg, #f0f4ff 0%, #e8eaff 100%)', 
+        backgroundColor: 'var(--bg-light)',
+        backgroundImage: 'linear-gradient(135deg, #f0f4ff 0%, #e8eaff 100%)',
         justifyContent: 'center',
         alignItems: 'center'
     };
 
-    
     const cardStyle = {
         width: '320px',
         height: '500px',
         borderRadius: '40px',
-        background: 'linear-gradient(180deg, #ff9a44 0%, #fc6076 100%)', 
+        background: 'linear-gradient(180deg, #ff9a44 0%, #fc6076 100%)',
         boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
         display: 'flex',
         flexDirection: 'column',
@@ -58,7 +57,6 @@ const AuthLayout = ({ children }) => {
         textShadow: '0 2px 4px rgba(0,0,0,0.2)'
     };
 
-  
     const runnerPlaceholderStyle = {
         position: 'absolute',
         top: '50%',
@@ -67,7 +65,6 @@ const AuthLayout = ({ children }) => {
         fontSize: '80px',
         opacity: '0.5'
     };
-
 
     const rightPaneStyle = {
         flex: '1',
@@ -96,7 +93,6 @@ const AuthLayout = ({ children }) => {
                     </div>
                 </div>
 
-                {/* Abstract background shapes could go here if we had time to draw SVG blobs */}
             </div>
 
             <div style={rightPaneStyle}>
@@ -105,8 +101,6 @@ const AuthLayout = ({ children }) => {
                 </div>
             </div>
 
-            {/* Mobile-hiding logic would usually go in a media query CSS file, 
-          but for now we assume desktop first as per screenshots */}
         </div>
     );
 };

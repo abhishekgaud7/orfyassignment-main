@@ -69,7 +69,7 @@ const ProductCard = ({ product, onEdit, onDelete, onTogglePublish, isPublished }
 
     const publishBtnStyle = {
         ...btnBaseStyle,
-        backgroundColor: isPublished ? '#4CAF50' : '#0B105C', // Green for Unpublish (active), Blue for Publish
+        backgroundColor: isPublished ? '#4CAF50' : '#0B105C',
         color: '#fff'
     };
 
@@ -83,7 +83,7 @@ const ProductCard = ({ product, onEdit, onDelete, onTogglePublish, isPublished }
     const iconBtnStyle = {
         ...btnBaseStyle,
         flex: '0 0 40px',
-        display: 'flex', // center icon
+        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
@@ -91,7 +91,6 @@ const ProductCard = ({ product, onEdit, onDelete, onTogglePublish, isPublished }
         color: '#888'
     };
 
-    // Safe defaults
     const {
         name = 'Unknown Product',
         type = '-',
@@ -105,8 +104,6 @@ const ProductCard = ({ product, onEdit, onDelete, onTogglePublish, isPublished }
     return (
         <div style={cardStyle}>
             <div style={imageContainerStyle}>
-                {/* Placeholder for now, or use a prop if we had real images */}
-                {/* <img src="https://placehold.co/200x200/png?text=Product" alt={name} style={imgStyle} /> */}
                 <img
                     src={
                         product.images?.length
@@ -169,7 +166,6 @@ const ProductCard = ({ product, onEdit, onDelete, onTogglePublish, isPublished }
                     style={iconBtnStyle}
                     onClick={() => onDelete(product)}
                 >
-                    {/* Trash Icon */}
                     🗑️
                 </button>
             </div>

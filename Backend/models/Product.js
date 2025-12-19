@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(
   {
-    // Basic Product Info
     name: {
       type: String,
       required: [true, "Product name is required"],
@@ -14,7 +13,6 @@ const productSchema = new mongoose.Schema(
       required: [true, "Product type is required"]
     },
 
-    // Pricing & Stock
     stock: {
       type: Number,
       required: [true, "Stock is required"],
@@ -44,7 +42,6 @@ const productSchema = new mongoose.Schema(
       default: "Yes"
     },
 
-    // Publish Status
     isPublished: {
       type: Boolean,
       default: false
