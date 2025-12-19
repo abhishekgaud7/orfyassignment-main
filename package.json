@@ -1,0 +1,8 @@
+{
+    "name": "orfyassignment-root",
+    "private": true,
+    "scripts": {
+        "build": "cd Frontend && npm install && npm run build",
+        "install": "cd Frontend && npm install && cd ../Backend && npm install"
+    }
+}
